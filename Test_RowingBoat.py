@@ -49,6 +49,47 @@ def test_weight_capacity_effect(standard_boat):
     assert heavy_boat._is_afloat == False
 
 
+def test_max_speed_achievement(standard_boat):
+    """TC-SYS-03: Достижение максимальной скорости при длительном ускорении"""
+    standard_boat.acceleration = 1.0
+    for _ in range(100):
+        standard_boat.move(1.0)
+
+    assert standard_boat.speed == pytest.approx(standard_boat._max_speed)
+
+
+def test_moving_turn(standard_boat):
+    """TC-SYS-04: Возможность осуществления поворота в движении"""
+    standard_boat.acceleration = 1.0
+    standard_boat.rotation = 0.1
+    standard_boat.move(1.0)
+
+    assert standard_boat.position[0] > 0
+    assert standard_boat.position[1] < 0
+    assert standard_boat.speed > 0
+
+
+def test_in_place_turn(standard_boat):
+    """TC-SYS-05: Возможность осуществления поворота на месте"""
+    standard_boat.rotation = 1.0
+    standard_boat.move(1.0)
+
+    assert standard_boat.position[0] == 0
+    assert standard_boat.position[1] == 0
+    assert standard_boat.speed == 0
+    assert standard_boat.direction > 0
+
+
+def test_inertia_movement(standard_boat):
+    """TC-SYS-06: Движение по инерции"""
+    standard_boat.acceleration = 1.0
+    for _ in range(10):
+        standard_boat.move(1.0)
+    standard_boat.acceleration = 0.0
+    standard_boat.move(1.0)
+
+    assert standard_boat.speed > 0
+
 ### Интеграционные тесты ###
 
 def test_rowing_and_steering_interaction(standard_boat):
@@ -67,15 +108,39 @@ def test_rowing_and_steering_interaction(standard_boat):
 def test_rowing_frequency_impact(standard_boat):
     """TC-INT-02: Влияние частоты гребли на скорость"""
     standard_boat.acceleration = 0.5
-    standard_boat.move(1.0)
+    for _ in range(100):
+        standard_boat.move(1.0)
     speed1 = standard_boat.speed
 
     standard_boat.acceleration = 1.0
-    standard_boat.move(1.0)
+    for _ in range(100):
+        standard_boat.move(1.0)
     speed2 = standard_boat.speed
 
     assert speed2 > speed1
 
+
+def test_rowing_in_sync(standard_boat):
+    """TC-INT-03: Синхронная гребля с двух сторон"""
+    standard_boat.acceleration = 1.0
+    standard_boat.rotation = 0.1
+    for _ in range(10):
+        standard_boat.move(1.0)
+
+    assert standard_boat.rowing_rate[0] == standard_boat.rowing_rate[1]
+    assert standard_boat.direction == 0.0
+
+
+def test_async_rowing(standard_boat):
+    """TC-INT-04: Асинхронная гребля при повороте в движении"""
+    standard_boat.acceleration = 1.0
+    standard_boat.rotation = 0.1
+    for _ in range(10):
+        standard_boat.move(1.0)
+
+    assert standard_boat.rowing_rate[0] > standard_boat.rowing_rate[1]
+    assert standard_boat.rowing_rate[0] > 0
+    assert standard_boat.rowing_rate[1] > 0
 
 ### Функциональные тесты ###
 
