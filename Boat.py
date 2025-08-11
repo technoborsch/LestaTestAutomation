@@ -22,6 +22,7 @@ class Boat(Vehicle):
         self._rotation = 0.0 # Текущее вращение, град/с. Положительное по часовой стрелке
         self._direction = 0.0  # градусы (0 - север)
         self._position = (0.0, 0.0)  # x, y координаты
+        self._is_afloat = True # На плаву ли лодка
 
     @property
     def position(self) -> Tuple[float, float]:

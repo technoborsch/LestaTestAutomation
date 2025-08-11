@@ -9,10 +9,10 @@ class RowingBoat(Boat):
     def __init__(self,
                  max_weight: float, # кг
                  weight: float, # кг
-                 number_of_rowers: int, # число гребцов
-                 max_rowing_frequency, # предельная частота гребков
-                 max_speed: float, # предельная скорость лодки
-                 max_rotation: float, # предельные обороты в секунду вокруг своей оси
+                 number_of_rowers: int, # Число гребцов
+                 max_rowing_frequency, # Предельная частота гребков
+                 max_speed: float, # Предельная скорость лодки
+                 max_rotation: float, # Предельные обороты в секунду вокруг своей оси
                  rower_force: float): # Сила одного гребца
         super().__init__(max_weight, weight, max_speed, max_rotation, rower_force * number_of_rowers)
         self._rowers_count = number_of_rowers
