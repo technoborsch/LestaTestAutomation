@@ -46,6 +46,7 @@ def test_weight_capacity_effect(standard_boat):
     assert heavy_boat.speed == 0
     assert heavy_boat.position[0] == 0
     assert heavy_boat.position[1] == 0
+    assert heavy_boat._is_afloat == False
 
 
 ### Интеграционные тесты ###

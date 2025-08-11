@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from typing import Tuple
 
 
@@ -10,50 +10,50 @@ class Vehicle(ABC):
         """Обновить положение транспортного средства"""
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def position(self) -> Tuple[float, float]:
         """Получить текущие координаты"""
         pass
 
-    @abstractmethod
     @position.setter
+    @abstractmethod
     def position(self, position: Tuple[float, float]) -> None:
         """Установить новую позицию"""
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def speed(self) -> float:
         """Получить текущую скорость"""
         pass
 
-    @abstractmethod
     @speed.setter
+    @abstractmethod
     def speed(self, speed: float) -> None:
         """Установить новую скорость"""
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def direction(self) -> float:
         """Получить текущее направление движения в градусах"""
         pass
 
-    @abstractmethod
     @direction.setter
+    @abstractmethod
     def direction(self, direction: float) -> None:
         """Задать новое направление движения в градусах"""
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def rotation(self) -> float:
         """Получить текущее значение скорости поворота"""
         pass
 
-    @abstractmethod
     @rotation.setter
+    @abstractmethod
     def rotation(self, new_rotation: float) -> None:
         """Задать новую скорость поворота"""
         pass
