@@ -39,5 +39,5 @@
 
 3. Автоматизированные тесты находятся в файле "Test_RowingBoat.py".
 
-[!Boat](https://github.com/technoborsch/LestaTestAutomation/raw/master/boat.jpg)
+![Boat](https://github.com/technoborsch/LestaTestAutomation/raw/master/boat.jpg)
 
